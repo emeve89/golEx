@@ -2,6 +2,42 @@ defmodule GameOfLife.BoardServer do
   use GenServer
   require Logger
 
+  @moduledoc """
+  ## Example
+      iex> GameOfLife.BoardServer.start_game
+      :game_started
+      iex> GameOfLife.BoardServer.start_game
+      :game_already_running
+      iex> GameOfLife.BoardServer.stop_game
+      :game_stoped
+      iex> GameOfLife.BoardServer.stop_game
+      :game_not_running
+      iex> GameOfLife.BoardServer.change_speed(500)
+      :game_started
+      iex> GameOfLife.BoardServer.stop_game
+      :game_stoped
+
+      iex> GameOfLife.BoardServer.set_alive_cells([{0, 0}])
+      [{0, 0}]
+      iex> GameOfLife.BoardServer.alive_cells
+      [{0, 0}]
+      iex> GameOfLife.BoardServer.add_cells([{0, 1}])
+      [{0, 0}, {0, 1}]
+      iex> GameOfLife.BoardServer.alive_cells
+      [{0, 0}, {0, 1}]
+      iex> GameOfLife.BoardServer.state
+      {[{0, 0}, {0, 1}], 0}
+
+      iex> GameOfLife.BoardServer.generation_counter
+      0
+      iex> GameOfLife.BoardServer.tick
+      :ok
+      iex> GameOfLife.BoardServer.generation_counter
+      1
+      iex> GameOfLife.BoardServer.state
+      {[], 1}
+  """
+
   @name {:global, __MODULE__}
   @game_speed 1000
 
