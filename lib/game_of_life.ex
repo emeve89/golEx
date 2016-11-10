@@ -10,6 +10,8 @@ defmodule GameOfLife do
     children = [
       # Starts a worker by calling: GameOfLife.Worker.start_link(arg1, arg2, arg3)
       # worker(GameOfLife.Worker, [arg1, arg2, arg3]),
+      supervisor(Task.Supervisor, [[name: GameOfLife.TasksSupervisor]]),
+      worker(GameOfLife.BoardServer, [init_alive_cells]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
